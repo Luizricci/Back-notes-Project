@@ -27,9 +27,9 @@ const getNoteById = async (req, res) => {
 };
 
 const createNote = async (req, res) => {
-    const { titulo, conteudo } = req.body;
+    const { titulo, conteudo, arquivado, favorito } = req.body;
     try {
-        const newNote = await notesModels.insertNote(titulo, conteudo);
+        const newNote = await notesModels.insertNote(titulo, conteudo, arquivado, favorito);
         res.status(201).json(newNote);
     } catch (error) {
         res.status(500).json({ error: 'Falha ao criar nova nota' });
@@ -39,9 +39,9 @@ const createNote = async (req, res) => {
 
 const updateNote = async (req, res) => {
     const { id } = req.params;
-    const { titulo, conteudo } = req.body;
+    const { titulo, conteudo, arquivado, favorito } = req.body;
     try {
-        const updatedNote = await notesModels.updateNote(id, titulo, conteudo);
+        const updatedNote = await notesModels.updateNote(id, titulo, conteudo, arquivado, favorito);
         if (!updatedNote) {
             res.status(404).json({ error: 'Nota não encontrada' });
         } else {
@@ -60,7 +60,7 @@ const deleteNote = async (req, res) => {
         if (!deletedNote) {
             res.status(404).json({ error: 'Nota não encontrada' });
         } else {
-            res.status(200).json(deletedNote);
+            res.status(200).json('nota deletada com sucesso');
         }
     } catch (error) {
         res.status(500).json({ error: 'Falha ao deletar a nota' });
