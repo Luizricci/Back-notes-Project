@@ -21,3 +21,8 @@ CREATE TABLE contacts (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+INSERT INTO notes (titulo, conteudo) 
+VALUES
+('Título da nota', '<p>Conteúdo <strong>HTML</strong> gerado pelo TinyMCE</p>');
+
