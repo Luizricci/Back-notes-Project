@@ -208,10 +208,5 @@ Cria um novo contato.
 
 **Luiz Henrique Ricci Aureliano**
 
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
 
 ⭐ Se este projeto te ajudou, considere dar uma estrela no repositório!
