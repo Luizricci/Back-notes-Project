@@ -17,7 +17,7 @@ const getNoteById = async (req, res) => {
         const note = await notesModels.getNoteById(id);
         if (!note) {
             res.status(404).json({ error: 'Nota não encontrada' });
-        } else {    
+        } else {
             res.status(200).json(note);
         }
     } catch (error) {
@@ -28,14 +28,24 @@ const getNoteById = async (req, res) => {
 
 const createNote = async (req, res) => {
     const { titulo, conteudo, arquivado, favorito } = req.body;
+
+    valida(titulo, conteudo, res)
+
     try {
         const newNote = await notesModels.insertNote(titulo, conteudo, arquivado, favorito);
         res.status(201).json(newNote);
     } catch (error) {
-        res.status(500).json({ error: 'Falha ao criar nova nota' });
-        console.error('Erro ao criar nova nota:', error);
+        res.status(500).json({ error: 'Falha ao criar a nota' });
+        console.error('Erro ao criar a nota:', error);
     }
 };
+
+function valida(titulo, conteudo, res) {
+    if (!titulo || !conteudo) {
+        return res.status(400).json({ error: 'Título e conteúdo são obrigatórios ' });
+    }
+    return true;
+}
 
 const updateNote = async (req, res) => {
     const { id } = req.params;
@@ -68,10 +78,13 @@ const deleteNote = async (req, res) => {
     }
 };
 
+
+
 module.exports = {
     getAllNotes,
     createNote,
     getNoteById,
     updateNote,
-    deleteNote
+    deleteNote,
+    valida
 };
