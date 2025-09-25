@@ -1,4 +1,4 @@
-const contactsModels = require('../models/contactsModels'); 
+const contactsModels = require('../models/contactsModels');
 
 const getAllContacts = async (req, res) => {
     try {
@@ -15,7 +15,7 @@ const getContactById = async (req, res) => {
         const contact = await contactsModels.getContactById(id);
         if (!contact) {
             res.status(404).json({ error: 'Contato não encontrado' });
-        } else {    
+        } else {
             res.status(200).json(contact);
         }
     } catch (error) {
@@ -25,6 +25,12 @@ const getContactById = async (req, res) => {
 };
 const createContact = async (req, res) => {
     const { nome, email, telefone, cidade, mensagem } = req.body;
+    
+    const validacao = valida(nome, email, telefone, cidade, mensagem, res);
+    if (!validacao) {
+        return; // Para a execução se a validação falhou
+    }
+    
     try {
         const newContact = await contactsModels.insertContact(nome, email, telefone, cidade, mensagem);
         res.status(201).json(newContact);
@@ -34,6 +40,13 @@ const createContact = async (req, res) => {
         console.error('Erro ao criar novo contato:', error);
     }
 };
+function valida(nome, email, telefone, cidade, mensagem, res) {
+    if (!nome || !email || !telefone || !cidade || !mensagem) {
+        res.status(400).json({ error: 'Todos os campos são obrigatórios ' });
+        return false;
+    }
+    return true;
+}
 const updateContact = async (req, res) => {
     const { id } = req.params;
     const { nome, email, telefone, cidade, mensagem } = req.body;
@@ -70,5 +83,6 @@ module.exports = {
     getContactById,
     createContact,
     updateContact,
-    deleteContact
+    deleteContact,
+    valida
 };
