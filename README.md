@@ -51,8 +51,9 @@ back-notes/
 
 ### 1. Clone o repositório e entre na pasta
 ```bash
-git clone https://github.com/Luizricci/Back-notes-Project.git &&
-cd back-notes
+git clone https://github.com/Luizricci/Back-notes-Project.git 
+
+cd back-notes-Project
 ```
 ### 2. Instale as dependências
 ```bash

@@ -28,6 +28,12 @@ CREATE TABLE contacts (
 INSERT INTO notes (titulo, conteudo, arquivado, favorito) 
 VALUES
 ('Título da nota', '<p>Conteúdo <strong>HTML</strong> gerado pelo TinyMCE</p>', FALSE, FALSE);
+INSERT INTO notes (titulo, conteudo, arquivado, favorito) 
+VALUES
+('Título da nota', '<p>Conteúdo <strong>HTML</strong> gerado pelo TinyMCE com o Felps</p>', FALSE, FALSE);
+
+
+
 
 INSERT INTO contacts (cidade, nome, email, telefone, mensagem)
 VALUES
